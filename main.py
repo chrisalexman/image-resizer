@@ -30,11 +30,20 @@ def resize_images():
 
             img = Image.open(image_path)
             height, width = img.size
-
             print(f'{height} | {width}')
 
-            resized = img.resize((width, int(height / 2)))
-            # resized.save(f'{output_path}\{image}')
+            # 4:3 ratio || 1 / 1.33 = height / width
+            #   height = width / 1.33
+            #   width - 1.33 * height
+            height_ratio = round(width / 1.33)
+
+            # set height & width to 4:3 ratio based on smaller side
+            if(height_ratio > height):
+                width = round(1.33 * height)
+            else:
+                height = height_ratio
+
+            print(f'{height} | {width}')
 
 
 if __name__ == '__main__':
