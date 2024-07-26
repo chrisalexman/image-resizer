@@ -161,7 +161,7 @@ def resize_images():
                 img = img.crop((left, top, right, bottom))
                 print(f'reduced {image} | {ratio_before:.4f} -> {ratio_after:.4f}')
 
-        img.save(f'{output_path}\{image}')
+            img.save(f'{output_path}\{image}')
 
 
 if __name__ == '__main__':
