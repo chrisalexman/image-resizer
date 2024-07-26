@@ -9,6 +9,10 @@ INPUT:
 
 OUTPUT:
 - .jpg file at the 4:3 aspect ratio
+
+SOURCES:
+- https://pillow.readthedocs.io/en/stable/reference/Image.html
+- https://www.mathworks.com/help/images/image-coordinate-systems.html
 '''
 
 import os
@@ -26,24 +30,50 @@ def resize_images():
 
         image_path = f'{input_path}\{image}'
 
+        # consider image 001 for development
         if(image == '001.jpg'):
 
             img = Image.open(image_path)
-            height, width = img.size
-            print(f'{height} | {width}')
 
-            # 4:3 ratio || 1 / 1.33 = height / width
-            #   height = width / 1.33
-            #   width - 1.33 * height
-            height_ratio = round(width / 1.33)
+            # width is up/down, height is left/right
+            width, height = img.size
+            print(f'w: {width} | h: {height}')
+
+            # 4:3 ratio || 1 / 1.33 = width / height
+            #   width = height / 1.33
+            #   height = 1.33 * width
+            width_ratio = round(height / 1.33)
 
             # set height & width to 4:3 ratio based on smaller side
-            if(height_ratio > height):
-                width = round(1.33 * height)
+            if(width_ratio > width):
+                height_ratio = round(1.33 * width)
+                width_ratio = width
             else:
-                height = height_ratio
+                height_ratio = height
 
-            print(f'{height} | {width}')
+            
+            '''
+
+            cartesian pixel coordinate system:
+                - top left is (0,0)
+                - pixel indices are [y, x]
+
+               (0,0) ___________ (x, 0)
+                    |           |
+                    |           |
+                    |___________|
+              (0, y)             (x, y)
+            
+            '''
+
+            pixel_img = img.load()
+            y = width - 1
+            x = height - 1   
+
+            left_side = [round(y / 2), 0]
+            right_side = [round(y / 2), x]
+            top_side = [0, round(x / 2)]
+            bottom_side = [y, round(x / 2)]
 
 
 if __name__ == '__main__':
