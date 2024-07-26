@@ -1,6 +1,6 @@
 # image-resizer
 
-A basic script that takes in a .jpg file and crops it closer to the 4:3 aspect ratio.
+A basic script that takes in a .jpg file and crops it closer to the 2.5 x 3.5 inch ratio of a trading card.
 It considers whitespace along the image border for what to remove when cropping.
 
 ### INPUT
@@ -9,7 +9,7 @@ It considers whitespace along the image border for what to remove when cropping.
 - width range: 1023 or 1024
 
 ### OUTPUT
-- .jpg file as close to the 4:3 aspect ratio as possible
+- .jpg file as close to the 2.5 x 3.5 inch ratio as possible
 
 ### SOURCES:
 - https://pillow.readthedocs.io/en/stable/reference/Image.html

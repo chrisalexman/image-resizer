@@ -1,5 +1,5 @@
 '''
-A basic script that takes in a .jpg file and crops it closer to the 4:3 aspect ratio.
+A basic script that takes in a .jpg file and crops it closer to the 2.5 x 3.5 inch ratio of a trading card.
 It considers whitespace along the image border for what to remove when cropping.
 
 INPUT:
@@ -8,7 +8,7 @@ INPUT:
 - width range: 1023 or 1024
 
 OUTPUT:
-- .jpg file as close to the 4:3 aspect ratio as possible
+- .jpg file as close to the 2.5 x 3.5 inch ratio as possible
 
 SOURCES:
 - https://pillow.readthedocs.io/en/stable/reference/Image.html
@@ -19,12 +19,14 @@ import os
 from PIL import Image
 
 
-# resizes all images in the /input directory to the 4:3 aspect ratio
+# resizes all images in the /input directory to the 2.5 x 3.5 inch ratio
 def resize_images():
 
     project_path = os.path.dirname(os.path.abspath(__file__))
     input_path = f'{project_path}\input'
     output_path = f'{project_path}\output'
+
+    aspect_ratio = 1.4
 
     for image in os.listdir(input_path):
 
@@ -36,14 +38,14 @@ def resize_images():
             # width is left/right, height is up/down
             width, height = img.size
 
-            # 4:3 ratio || 1 / 1.33 = width / height
+            # e.g. 4:3 ratio || 1 / 1.33 = width / height
             #   width = height / 1.33
             #   height = 1.33 * width
-            width_ratio = round(height / 1.33)
+            width_ratio = round(height / aspect_ratio)
 
-            # set height & width to 4:3 ratio based on smaller side
+            # set height & width to 1.4 ratio based on smaller side
             if(width_ratio > width):
-                height_ratio = round(1.33 * width)
+                height_ratio = round(aspect_ratio * width)
                 width_ratio = width
             else:
                 height_ratio = height
@@ -139,7 +141,7 @@ def resize_images():
                             new_height = height - b - t
                             new_ratio = new_height / new_width
 
-                            if new_ratio < smallest_ratio and new_ratio > 1.33:
+                            if new_ratio < smallest_ratio and new_ratio >= aspect_ratio:
                                 smallest_ratio = new_ratio
                                 candidate = [l, r, t, b]
 
