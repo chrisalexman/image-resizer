@@ -18,12 +18,12 @@ The images for my project included the following:
 
 ## Example Output
 
-An example before and after of the image and aspect ratio changed.
+An example before and after of the image and aspect ratio changed. It's subtle but the whitespace was trimmed from the LEFT and BOTTOM sides of the image.
 
 Before | After
 :-----:|:-----:
 <img src="img/237_before.jpg" height="480" hspace=10/> | <img src="img/237_after.jpg" height="480" />
-**1.3299** | **1.4000**
+1.3299 | 1.4000
 
 ## Sources
 - https://pillow.readthedocs.io/en/stable/reference/Image.html
