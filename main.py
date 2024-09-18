@@ -32,6 +32,7 @@ class ResizeImage:
         self.project_path = os.path.dirname(os.path.abspath(__file__))
         self.input_path = f'{self.project_path}\input'
         self.output_path = f'{self.project_path}\output'
+        self.output_file = f'{self.project_path}\output.txt'
 
         # file data
         self.image = None
@@ -141,6 +142,9 @@ class ResizeImage:
     def loop_images(self):
         """Loop through .jpg images in the /input directory & crop them."""
 
+        # clear the output file
+        open(self.output_file, 'w').close()
+
         for self.image in os.listdir(self.input_path):
 
             image_path = f'{self.input_path}\{self.image}'
@@ -222,7 +226,11 @@ class ResizeImage:
             ratio_after = self.new_height / self.new_width
 
             img = img.crop((left, top, right, bottom))
-            print(f'changed {self.image} | {ratio_before:.4f} -> {ratio_after:.4f}')
+
+            output_line = f'changed {self.image} | {ratio_before:.4f} -> {ratio_after:.4f}\n'
+
+            with open(self.output_file, 'a') as file:
+                file.write(output_line)
 
         img.save(f'{self.output_path}\{self.image}')
 
