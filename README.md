@@ -18,7 +18,7 @@ The images for my project included the following:
 
 ## Example Output
 
-An example before and after of the image and aspect ratio changed. It's subtle but the whitespace was trimmed from the LEFT and BOTTOM sides of the image.
+An example before and after of the image and aspect ratio changed. It's subtle but the whitespace was trimmed from the LEFT and RIGHT sides of the image.
 
 Before | After
 :-----:|:-----:
